@@ -1,3 +1,5 @@
+# Projeto Figaro Dashboard (Sistema de Gerenciamento de Barbershops)
+
 # FigaroDashboard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
