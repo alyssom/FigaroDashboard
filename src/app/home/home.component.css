@@ -11,3 +11,11 @@
 .nav-bar{
     color: #9a514a;
 }
+#imgUser{
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+#nomeUser{
+    text-align: left;
+}

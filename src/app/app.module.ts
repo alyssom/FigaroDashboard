@@ -13,6 +13,7 @@ import { FIREBASE_CREDENCIAL } from './firebase.credencial';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MinhaBarbeariaComponent } from './minha-barbearia/minha-barbearia.component';
+import { GerenciadorUsuariosService } from './gerenciador-usuarios.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { MinhaBarbeariaComponent } from './minha-barbearia/minha-barbearia.compo
     AngularFireAuthModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GerenciadorUsuariosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

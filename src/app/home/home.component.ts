@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
+import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  nome;
+  user;
+  minhaBarbearia;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService) {
+    this.nome = this.service.nome;
+      if(this.service.user != undefined){
+        this.user = this.service.user.user;
+      }
+      this.minhaBarbearia = this.service.minhaBarbearia;
+    
+   }
 
   ngOnInit() {
   }
