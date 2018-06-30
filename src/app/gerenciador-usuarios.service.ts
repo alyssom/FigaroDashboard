@@ -8,8 +8,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class GerenciadorUsuariosService {
 
   public user;
-  public nome;
+  public nomeUser;
   public minhaBarbearia;
+  public foto1;
+
+  nomeProprietario;
+  
 
   constructor( private db: AngularFireDatabase, public afAuth: AngularFireAuth, public router: Router) { 
 
@@ -20,12 +24,14 @@ export class GerenciadorUsuariosService {
     .then(user => {
         this.user = user;
         console.log(this.user)
-        this.nome = this.user.user.displayName; 
+        this.nomeUser = this.user.user.displayName; 
 
         this.db.list('/barbearias', { preserveSnapshot: true })
         .subscribe(snapshots => {
           snapshots.forEach(snapshot => {
-            if(snapshot.val().nomeProprietario == this.nome){
+            if(snapshot.val().nomeProprietario == this.nomeUser){
+              this.nomeProprietario = snapshot.val().nomeProprietario;
+              this.foto1 = snapshot.val().foto1;
               this.minhaBarbearia = snapshot.val();
               this.router.navigate(['home']);
             }
@@ -33,6 +39,9 @@ export class GerenciadorUsuariosService {
         )
       }
     )
+    if(this.nomeProprietario != this.nomeUser){
+      this.router.navigate(['cadastro']);
+    }
     }).catch(error => {
 
       //console.log(error.status);

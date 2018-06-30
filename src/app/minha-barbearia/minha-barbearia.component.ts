@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
 
 @Component({
   selector: 'app-minha-barbearia',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MinhaBarbeariaComponent implements OnInit {
 
-  constructor() { }
+  foto1;
+  user;
+
+  constructor(public service: GerenciadorUsuariosService) { 
+    this.user = this.service.user.user;
+    this.foto1 = this.service.foto1;
+  }
 
   ngOnInit() {
+   
   }
 
 }

@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MinhaBarbeariaComponent } from './minha-barbearia/minha-barbearia.component';
 import { GerenciadorUsuariosService } from './gerenciador-usuarios.service';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { GerenciadorUsuariosService } from './gerenciador-usuarios.service';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    MinhaBarbeariaComponent
+    MinhaBarbeariaComponent,
+    CadastroComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

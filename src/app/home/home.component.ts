@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   minhaBarbearia;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService) {
-    this.nome = this.service.nome;
+    this.nome = this.service.nomeUser;
       if(this.service.user != undefined){
         this.user = this.service.user.user;
       }
