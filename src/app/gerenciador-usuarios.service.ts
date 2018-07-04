@@ -11,7 +11,8 @@ export class GerenciadorUsuariosService {
   public nomeUser;
   public minhaBarbearia;
   public foto1;
-
+  public agendamentos = [];
+  
   nomeProprietario;
   
 
@@ -33,6 +34,17 @@ export class GerenciadorUsuariosService {
               this.nomeProprietario = snapshot.val().nomeProprietario;
               this.foto1 = snapshot.val().foto1;
               this.minhaBarbearia = snapshot.val();
+              this.db.list('/agendamentos', { preserveSnapshot: true })
+              .subscribe(snapshots => {
+                snapshots.forEach(snapshot => {
+                  console.log(snapshot.val().nomeCliente);
+                  if(snapshot.val().nomeBarbearia == this.minhaBarbearia.nome){
+                    this.agendamentos.push(snapshot.val())
+                  }
+                }
+              )
+            })
+
               this.router.navigate(['home']);
             }
           }
@@ -49,6 +61,14 @@ export class GerenciadorUsuariosService {
       //console.log(error.headers);
 
     });
+  }
+
+  limpaDados(){
+    this.user = "";
+    this.nomeUser = "";
+    this.nomeProprietario = "";
+    this.minhaBarbearia = "";
+    this.agendamentos = [];
   }
 
 }

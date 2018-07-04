@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router: Router) { 
+  constructor(public router: Router, public afAuth: AngularFireAuth, public service: GerenciadorUsuariosService) { 
 
   }
 
@@ -20,6 +22,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  logout(){
+    this.afAuth.auth.signOut();
+    this.service.limpaDados();
+    this.router.navigate([''])
   }
 
 }

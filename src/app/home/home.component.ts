@@ -12,21 +12,19 @@ export class HomeComponent implements OnInit {
   nome;
   user;
   minhaBarbearia;
+  agendamentos;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService) {
     this.nome = this.service.nomeUser;
       if(this.service.user != undefined){
         this.user = this.service.user.user;
       }
+      this.agendamentos = this.service.agendamentos;
       this.minhaBarbearia = this.service.minhaBarbearia;
-    
    }
 
   ngOnInit() {
   }
   
-  logout(){
-    this.afAuth.auth.signOut();
-    this.router.navigate([''])
-  }
+  
 }
