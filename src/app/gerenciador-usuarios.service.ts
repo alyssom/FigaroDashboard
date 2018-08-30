@@ -37,10 +37,12 @@ export class GerenciadorUsuariosService {
               this.db.list('/agendamentos', { preserveSnapshot: true })
               .subscribe(snapshots => {
                 snapshots.forEach(snapshot => {
-                  console.log(snapshot.val().nomeCliente);
-                  if(snapshot.val().nomeBarbearia == this.minhaBarbearia.nome){
-                    this.agendamentos.push(snapshot.val())
-                  }
+                  console.log(snapshot.val().nome);
+                      if(snapshot.val().nome == this.minhaBarbearia.nome){
+                        this.agendamentos.push(snapshot.val())
+                      }
+                    
+                  
                 }
               )
             })

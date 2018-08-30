@@ -12,7 +12,10 @@ export class MinhaBarbeariaComponent implements OnInit {
   user;
 
   constructor(public service: GerenciadorUsuariosService) { 
-    this.user = this.service.user.user;
+    if(this.service.user.user){
+      this.user = this.service.user.user;
+    }
+    
     this.foto1 = this.service.foto1;
   }
 

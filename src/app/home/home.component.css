@@ -22,3 +22,23 @@
 #divPrincipal{
     padding-bottom: 500px;
 }
+
+#menuLateral{
+    background-color: white;
+    text-align: center;
+}
+#divUser{
+    text-align: center;
+}
+.sidebar-sticky{
+    background-color: white;
+}
+
+#imgUser{
+    position: relative;
+    text-align: center;
+}
+
+#menuUsuario{
+    text-align: center;
+}
