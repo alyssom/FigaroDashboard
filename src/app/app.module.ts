@@ -16,6 +16,7 @@ import { MinhaBarbeariaComponent } from './minha-barbearia/minha-barbearia.compo
 import { GerenciadorUsuariosService } from './gerenciador-usuarios.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     MinhaBarbeariaComponent,
     CadastroComponent,
-    NavbarComponent
+    NavbarComponent,
+    MenuLateralComponent
   ],
   imports: [
     BrowserModule,

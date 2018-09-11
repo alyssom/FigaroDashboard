@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
       if(this.service.user != undefined){
         this.user = this.service.user.user;
       }
+      
       this.agendamentos = this.service.agendamentos;
       this.minhaBarbearia = this.service.minhaBarbearia;
    }

@@ -26,28 +26,27 @@ export class GerenciadorUsuariosService {
         this.user = user;
         console.log(this.user)
         this.nomeUser = this.user.user.displayName; 
-
         this.db.list('/barbearias', { preserveSnapshot: true })
         .subscribe(snapshots => {
           snapshots.forEach(snapshot => {
+            var agendamentosAux = [];
             if(snapshot.val().nomeProprietario == this.nomeUser){
               this.nomeProprietario = snapshot.val().nomeProprietario;
               this.foto1 = snapshot.val().foto1;
               this.minhaBarbearia = snapshot.val();
               this.db.list('/agendamentos', { preserveSnapshot: true })
               .subscribe(snapshots => {
+                agendamentosAux.length = 0;
                 snapshots.forEach(snapshot => {
                   console.log(snapshot.val().nome);
                       if(snapshot.val().nome == this.minhaBarbearia.nome){
-                        this.agendamentos.push(snapshot.val())
+                        agendamentosAux.push(snapshot.val());
                       }
-                    
-                  
                 }
               )
             })
-
               this.router.navigate(['home']);
+              this.agendamentos = agendamentosAux;
             }
           }
         )
@@ -72,5 +71,9 @@ export class GerenciadorUsuariosService {
     this.minhaBarbearia = "";
     this.agendamentos = [];
   }
+
+  
+
+
 
 }
