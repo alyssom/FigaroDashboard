@@ -29,3 +29,7 @@
 #menuUsuario{
     text-align: center;
 }
+
+.sidebar-sticky{
+    margin-top: 18px;
+}
