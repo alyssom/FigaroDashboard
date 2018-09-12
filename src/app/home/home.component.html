@@ -28,12 +28,9 @@
           <div class="col-xl-2 col-sm-2 mb-2">
             <app-menu-lateral></app-menu-lateral>
           </div>
-          
-            <div class="row">
-
-              <div class="col-xl-12 col-sm-12 mb-12">    
-                  <div class="card text-white bg-primary o-hidden h-100">
-                      <div class="card-body col-xl-12 col-sm-12 mb-12">
+                  
+                      <div class="card-body col-xl-10 col-sm-10 mb-10">
+                        <div class="card text-white bg-primary o-hidden h-100">
                         <div class="card-body-icon">
                           <i class="fa fa-fw fa-comments"></i>
                         </div>
@@ -44,6 +41,7 @@
                                 <thead>
                                   <tr>
                                     <th scope="col">Nome do Cliente</th>
+                                    <th scope="col">Data</th>
                                     <th scope="col">Horário</th>
                                     <th scope="col">Serviço</th>
                                   </tr>
@@ -53,7 +51,10 @@
                                     <th >
                                       {{agendamento.nomeCliente}}
                                     </th>
-                                    <th >
+                                    <th>
+                                        {{agendamento.dataAgendamento}}
+                                      </th>
+                                    <th>
                                         {{agendamento.horario}}
                                       </th>
                                       <th >
@@ -62,13 +63,7 @@
                                   </tr>
                                 </tbody>
                               </table>
-                          
-                      
-                 
-                  </div>
               </div>
-
-                      </div>
                 </div>
                   
                 </div>
