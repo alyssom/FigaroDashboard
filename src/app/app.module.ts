@@ -17,7 +17,7 @@ import { GerenciadorUsuariosService } from './gerenciador-usuarios.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,9 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
      AngularFireModule.initializeApp(FIREBASE_CREDENCIAL),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [GerenciadorUsuariosService],
   bootstrap: [AppComponent]

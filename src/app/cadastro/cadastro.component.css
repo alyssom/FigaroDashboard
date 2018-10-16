@@ -1,0 +1,25 @@
+.form-row{
+    padding-left: 15%;
+    padding-right: 15%;
+
+}
+
+#rowZero{
+    padding-top: 3%;
+}
+
+#rowCinco{
+    padding-bottom: 5%; 
+}
+.btn{
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+#imgUser{
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
