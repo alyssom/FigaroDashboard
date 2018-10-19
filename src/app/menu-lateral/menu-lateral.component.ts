@@ -10,7 +10,6 @@ export class MenuLateralComponent implements OnInit {
 
   user;
   minhaBarbearia;
-
   constructor(public service: GerenciadorUsuariosService) { 
     if(this.service.user != undefined){
       this.user = this.service.user.user;

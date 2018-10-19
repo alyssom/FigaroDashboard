@@ -3,6 +3,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
 import Swal from 'sweetalert2';
+import { FirebaseApp } from 'angularfire2';
+import * as firebase from 'firebase/app';
+import 'firebase/storage'
+import { storage } from 'firebase';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,9 +16,11 @@ import Swal from 'sweetalert2';
 export class CadastroComponent implements OnInit {
 
   formulario: FormGroup;
+  fotoSelecionada: File;
   user = null;
 
-  constructor(private fdb: AngularFireDatabase, private formBuilder: FormBuilder, private service: GerenciadorUsuariosService) { 
+  constructor(private fdb: AngularFireDatabase, private formBuilder: FormBuilder, 
+    private service: GerenciadorUsuariosService, private firebase: FirebaseApp) { 
     if(service.user != null || service.user != undefined){
       this.user = service.user;
     }
@@ -51,12 +57,27 @@ export class CadastroComponent implements OnInit {
   }
   imgSelecionada(img){
     console.log(img.target.files[0]);
-    this.formulario.value.fotos = img.target.files[0];
+    this.fotoSelecionada = img.target.files[0];
   }
   
 
   cadastrar(){
-    const swal = require('sweetalert2');
+    
+      var fileName = this.fotoSelecionada.name;
+      const storageRef = firebase.storage().ref('/imagensBarbearias/' + fileName);
+      var uploadTask = storageRef.put(this.fotoSelecionada);
+      
+
+
+      uploadTask.on('state_change', function(snapshot){
+
+      }, function(error){
+
+      }, function(){
+        
+        var downloadUrl = uploadTask.snapshot.downloadURL;
+        console.log(downloadUrl)
+      })
 
     this.fdb.list("/barbearias/").push({
       nome: this.formulario.value.nomeBarberShop,
@@ -70,14 +91,14 @@ export class CadastroComponent implements OnInit {
       horario_de: this.formulario.value.horario_de,
       horario_ate: this.formulario.value.horario_ate
     });
-
-    swal({
-      position: 'center',
-      type: 'success',
-      title: 'BarberShop Cadastrada com Sucesso!',
-      showConfirmButton: false,
-      timer: 2000
-    })
+    
+    // swal({
+    //   position: 'center',
+    //   type: 'success',
+    //   title: 'BarberShop Cadastrada com Sucesso!',
+    //   showConfirmButton: false,
+    //   timer: 2000
+    // })
   }
 
 
