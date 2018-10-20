@@ -18,6 +18,8 @@ export class CadastroComponent implements OnInit {
   formulario: FormGroup;
   fotoSelecionada: File;
   user = null;
+  fotos;
+  downloadURL;
 
   constructor(private fdb: AngularFireDatabase, private formBuilder: FormBuilder, 
     private service: GerenciadorUsuariosService, private firebase: FirebaseApp) { 
@@ -62,43 +64,66 @@ export class CadastroComponent implements OnInit {
   
 
   cadastrar(){
-    
-      var fileName = this.fotoSelecionada.name;
-      const storageRef = firebase.storage().ref('/imagensBarbearias/' + fileName);
-      var uploadTask = storageRef.put(this.fotoSelecionada);
-      
+      var nome = this.formulario.value.nomeBarberShop;
+      var nomeProprietario = this.formulario.value.nomeProprietario;
+      var nomeBarberShop = this.formulario.value.nomeBarberShop;
+      var enderecoBarberShop = this.formulario.value.enderecoBarberShop;
+      var cepBarberShop = this.formulario.value.cepBarberShop;
+      var servicos = this.formulario.value.servicos;
+      var fotoProprietario = this.formulario.value.fotoProprietario;
+      var horario_de = this.formulario.value.horario_de;
+      var horario_ate = this.formulario.value.horario_ate;
 
+       var downloadUrl;
+       var fileName = this.fotoSelecionada.name;
+       const storageRef = firebase.storage().ref('/imagensBarbearias/' + fileName);
+       var uploadTask = storageRef.put(this.fotoSelecionada);
 
-      uploadTask.on('state_change', function(snapshot){
+       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, function(snapshot){
 
-      }, function(error){
+          console.log(snapshot);
 
-      }, function(){
-        
-        var downloadUrl = uploadTask.snapshot.downloadURL;
-        console.log(downloadUrl)
-      })
+        }, function(error){
+          console.log(error)
+        }, function(){
 
-    this.fdb.list("/barbearias/").push({
-      nome: this.formulario.value.nomeBarberShop,
-      nomeProprietario: this.formulario.value.nomeProprietario,
-      nomeBarberShop: this.formulario.value.nomeBarberShop,
-      enderecoBarberShop: this.formulario.value.enderecoBarberShop,
-      cepBarberShop: this.formulario.value.cepBarberShop,
-      servicos: this.formulario.value.servicos,
-      fotos: this.formulario.value.fotos,
-      fotoProprietario: this.formulario.value.fotoProprietario,
-      horario_de: this.formulario.value.horario_de,
-      horario_ate: this.formulario.value.horario_ate
-    });
-    
-    // swal({
-    //   position: 'center',
-    //   type: 'success',
-    //   title: 'BarberShop Cadastrada com Sucesso!',
-    //   showConfirmButton: false,
-    //   timer: 2000
-    // })
+          var postKey = firebase.database().ref('barbearias/').push().key;
+          downloadUrl = uploadTask.snapshot.downloadURL;
+          console.log(downloadUrl)
+          var updates = {};
+          var postData = {
+             nome: nome,
+             nomeProprietario: nomeProprietario,
+             nomeBarberShop: nomeBarberShop,
+             enderecoBarberShop: enderecoBarberShop,
+             cepBarberShop: cepBarberShop,
+             servicos: servicos,
+             fotoProprietario: fotoProprietario,
+             horario_de: horario_de,
+             horario_ate: horario_ate,
+             fotos: [] = downloadUrl
+          };
+
+          updates['/barbearias/' + postKey] = postData;
+          firebase.database().ref().update(updates);
+
+        })
+
+        //   this.fdb.list("/barbearias/").push({
+        //     nome: this.formulario.value.nomeBarberShop,
+        //     nomeProprietario: this.formulario.value.nomeProprietario,
+        //     nomeBarberShop: this.formulario.value.nomeBarberShop,
+        //     enderecoBarberShop: this.formulario.value.enderecoBarberShop,
+        //     cepBarberShop: this.formulario.value.cepBarberShop,
+        //     servicos: this.formulario.value.servicos,
+        //     fotos: downloadUrl,
+        //     fotoProprietario: this.formulario.value.fotoProprietario,
+        //     horario_de: this.formulario.value.horario_de,
+        //     horario_ate: this.formulario.value.horario_ate
+        //   });
+        // }
+       
+
   }
 
 

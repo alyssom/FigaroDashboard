@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-minha-barbearia',
@@ -8,15 +9,15 @@ import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
 })
 export class MinhaBarbeariaComponent implements OnInit {
 
-  foto1;
-  user;
+  
+  fotoUser;
+  fotoBarbearia;
+  minhaBarbearia;
 
-  constructor(public service: GerenciadorUsuariosService) { 
-    if(this.service.user.user){
-      this.user = this.service.user.user;
-    }
-    
-    this.foto1 = this.service.foto1;
+  constructor(public service: GerenciadorUsuariosService, public router: ActivatedRoute) { 
+    this.minhaBarbearia = router.params.subscribe(res => console.log(res));
+    console.log(this.minhaBarbearia);
+    this.fotoBarbearia = this.service.fotos;
   }
 
   ngOnInit() {

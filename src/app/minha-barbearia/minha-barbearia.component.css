@@ -1,8 +1,15 @@
 #imgUser{
-    
+    width: 500px;
+    height: 500px;
+    margin-bottom: 200px; 
 }
 #row{
-    margin-top: 40px;
-    padding-bottom: 500px;
-    padding-top: 500px;
+    margin-top: 15px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+#carousel{
+    margin-top: 150px;
+    padding-left: 50%;
+    padding-right: 15%;
 }

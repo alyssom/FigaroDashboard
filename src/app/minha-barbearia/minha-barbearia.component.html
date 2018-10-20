@@ -1,7 +1,30 @@
 <app-navbar></app-navbar>
   <div class="row" id="row">
-    <div class="col-xl-12 col-sm-12 mb-12">
-      <img id="imgUser" src="{{foto1}}" class="rounded float-left" alt="...">
-    </div>
+      <div class="col-xl-2 col-sm-2 mb-2">
+          <app-menu-lateral></app-menu-lateral>
+      </div>
+      <div class="col-xl-10 col-sm-10 mb-10">
+          <div id="carousel" class="carousel slide float-center" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="{{fotoBarbearia}}" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="..." alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="..." alt="Third slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>  
   </div>
 

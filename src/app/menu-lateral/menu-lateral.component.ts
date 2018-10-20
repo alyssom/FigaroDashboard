@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GerenciadorUsuariosService } from '../gerenciador-usuarios.service';
+import { Navigation } from 'selenium-webdriver';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -10,11 +12,15 @@ export class MenuLateralComponent implements OnInit {
 
   user;
   minhaBarbearia;
-  constructor(public service: GerenciadorUsuariosService) { 
+  constructor(public service: GerenciadorUsuariosService, public router: Router) { 
     if(this.service.user != undefined){
       this.user = this.service.user.user;
     }
     this.minhaBarbearia = this.service.minhaBarbearia;
+  }
+
+  vaiMinhaBarbearia(){
+    this.router.navigate(['minhaBarbearia'], this.minhaBarbearia);
   }
 
   ngOnInit() {
