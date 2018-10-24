@@ -10,7 +10,7 @@ export class GerenciadorUsuariosService {
   public user;
   public nomeUser;
   public minhaBarbearia;
-  public fotos;
+  public foto;
   public agendamentos = [];
   
   nomeProprietario;
@@ -32,7 +32,7 @@ export class GerenciadorUsuariosService {
             var agendamentosAux = [];
             if(snapshot.val().nomeProprietario == this.nomeUser){
               this.nomeProprietario = snapshot.val().nomeProprietario;
-              this.fotos = snapshot.val().fotos;
+              this.foto = snapshot.val().foto;
               this.minhaBarbearia = snapshot.val();
               this.db.list('/agendamentos', { preserveSnapshot: true })
               .subscribe(snapshots => {

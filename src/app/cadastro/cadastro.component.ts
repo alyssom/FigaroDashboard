@@ -74,6 +74,12 @@ export class CadastroComponent implements OnInit {
       var horario_de = this.formulario.value.horario_de;
       var horario_ate = this.formulario.value.horario_ate;
 
+      this.validaNomeBarberShopDuplicado(nome);
+      this.validaHoraAbreHoraFecha(horario_de, horario_ate);
+      this.validaFotoSelecionadaNula(this.fotoSelecionada);
+      this.validaEnderecoNulo(enderecoBarberShop, cepBarberShop);
+      this.validaServicosNulo(servicos);
+      
        var downloadUrl;
        var fileName = this.fotoSelecionada.name;
        const storageRef = firebase.storage().ref('/imagensBarbearias/' + fileName);
@@ -95,37 +101,60 @@ export class CadastroComponent implements OnInit {
              nome: nome,
              nomeProprietario: nomeProprietario,
              nomeBarberShop: nomeBarberShop,
-             enderecoBarberShop: enderecoBarberShop,
+             logradouro: enderecoBarberShop,
              cepBarberShop: cepBarberShop,
              servicos: servicos,
              fotoProprietario: fotoProprietario,
              horario_de: horario_de,
              horario_ate: horario_ate,
-             fotos: [] = downloadUrl
+             foto: [] = downloadUrl
           };
 
           updates['/barbearias/' + postKey] = postData;
           firebase.database().ref().update(updates);
 
         })
-
-        //   this.fdb.list("/barbearias/").push({
-        //     nome: this.formulario.value.nomeBarberShop,
-        //     nomeProprietario: this.formulario.value.nomeProprietario,
-        //     nomeBarberShop: this.formulario.value.nomeBarberShop,
-        //     enderecoBarberShop: this.formulario.value.enderecoBarberShop,
-        //     cepBarberShop: this.formulario.value.cepBarberShop,
-        //     servicos: this.formulario.value.servicos,
-        //     fotos: downloadUrl,
-        //     fotoProprietario: this.formulario.value.fotoProprietario,
-        //     horario_de: this.formulario.value.horario_de,
-        //     horario_ate: this.formulario.value.horario_ate
-        //   });
-        // }
-       
-
   }
 
 
+  validaServicosNulo(servicos: any): any {
+    if(servicos == null || servicos == undefined){
+      Swal('Favor informar os Serviços do BarberShop.')
+    }
+  }
+  validaEnderecoNulo(enderecoBarberShop: any, cepBarberShop: any): any {
+    if(enderecoBarberShop == null || enderecoBarberShop == undefined){
+      Swal('Favor informar o Endereço do BarberShop.')
+    }
+    if(cepBarberShop == null || cepBarberShop == undefined){
+      Swal('Favor informar o CEP do BarberShop.')
+    }
+  }
+  validaNomeBarberShopDuplicado(nome){
+    this.fdb.list('/barbearias', { preserveSnapshot: true })
+    .subscribe(snapshots => {
+      snapshots.forEach(snapshot => {
+        if(snapshot.val().nome == nome){
+          Swal('Ops... Já Existe um BarberShop com este nome.')
+        }
+      }
+    )
+  }
+)
+  }
 
+  validaHoraAbreHoraFecha(horaAbre, horaFecha){
+    if(horaAbre == null || horaFecha == null){
+      Swal('Favor informar horário de funcionamento.')
+    }
+    if(horaAbre >= horaFecha){
+      Swal('Ops... Horário de funcionamento inválido.')
+    }
+  }
+
+  validaFotoSelecionadaNula(fotoSelecionada: File): any {
+    if(fotoSelecionada == null || fotoSelecionada == undefined){
+      Swal('Selecione um Imagem para sua BarberShop.')
+    }
+  }
 }

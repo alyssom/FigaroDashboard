@@ -18,7 +18,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [GerenciadorUsuariosService],
   bootstrap: [AppComponent]
