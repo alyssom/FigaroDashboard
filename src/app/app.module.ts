@@ -17,6 +17,9 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgendamentosComponent } from './agendamentos/agendamentos.component';
+import { ChartsService } from './charts.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MinhaBarbeariaComponent,
     CadastroComponent,
     NavbarComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    AgendamentosComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +40,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [GerenciadorUsuariosService],
+  providers: [GerenciadorUsuariosService, ChartsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
