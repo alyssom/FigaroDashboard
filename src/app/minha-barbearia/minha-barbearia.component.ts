@@ -15,13 +15,13 @@ export class MinhaBarbeariaComponent implements OnInit {
   minhaBarbearia;
 
   constructor(public service: GerenciadorUsuariosService, public router: ActivatedRoute) { 
-    this.minhaBarbearia = router.params.subscribe(res => console.log(res));
-    console.log(this.minhaBarbearia);
-    this.fotoBarbearia = this.service.foto;
+    
   }
 
   ngOnInit() {
-   
+    this.minhaBarbearia = this.router.params.subscribe(res => console.log(res));
+    console.log(this.minhaBarbearia);
+    this.fotoBarbearia = this.service.foto;
   }
 
 }

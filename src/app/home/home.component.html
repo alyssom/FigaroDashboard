@@ -29,9 +29,20 @@
             <app-menu-lateral></app-menu-lateral>
           </div>
 
-          <div *ngIf="myChart">
-            <canvas id="canvas">{{myChart}}</canvas>
+          <div>
+              <button class="btn btn-success" (click)="randomize()">Buscar Horário de Maior Movimento</button>
+            <canvas id="canvas" baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+                    
           </div>
+          
+         
             
       </div>
      </div> 

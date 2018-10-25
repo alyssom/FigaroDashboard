@@ -12,7 +12,7 @@ export class GerenciadorUsuariosService {
   public minhaBarbearia;
   public foto;
   public agendamentos = [];
-  
+  public agendamentosAtendidos = [];
   nomeProprietario;
   
 

@@ -18,6 +18,11 @@ export class AgendamentosComponent implements OnInit {
 
   constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService,
    private db: AngularFireDatabase) {
+    
+   }
+
+
+  ngOnInit() {
     this.nome = this.service.nomeUser;
       if(this.service.user != undefined){
         this.user = this.service.user.user;
@@ -25,10 +30,6 @@ export class AgendamentosComponent implements OnInit {
       
       this.agendamentos = this.service.agendamentos;
       this.minhaBarbearia = this.service.minhaBarbearia;
-   }
-
-
-  ngOnInit() {
   }
 
   finalizarServico(agendamento){

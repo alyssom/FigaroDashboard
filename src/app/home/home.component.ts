@@ -20,69 +20,117 @@ export class HomeComponent implements OnInit {
 
   constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService,
    private db: AngularFireDatabase, private chartService: ChartsService) {
-    this.nome = this.service.nomeUser;
-      if(this.service.user != undefined){
-        this.user = this.service.user.user;
-      }
-      
-      this.agendamentos = this.service.agendamentos;
-      this.minhaBarbearia = this.service.minhaBarbearia;
 
-     
    }
-
   ngOnInit() {
-    this.chartService.dailyForecast()
-        .subscribe(res => {
-          console.log(res)
-           let temp_max = res['list'].map(res => res.temp.max);
-           let temp_min = res['list'].map(res => res.temp.min);
-           let dt = res['list'].map(res => res.dt);
+    this.nome = this.service.nomeUser;
+    if(this.service.user != undefined){
+      this.user = this.service.user.user;
+    }
+    
+    this.agendamentos = this.service.agendamentos;
+    this.minhaBarbearia = this.service.minhaBarbearia;
+    
 
-           let weatherDates = [];
-           dt.forEach((res) => {
-             let jsdate = new Date(res * 1000)
-             weatherDates.push(jsdate.toLocaleDateString('en', {year: 'numeric', month: 'short', day: 'numeric'}))
-           });
-           console.log(weatherDates)
 
-           this.myChart = new Chart('canvas', {
-            type: 'bar',
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [{
-                    label: '# of Votes',
-                    data: temp_max,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
+    this.db.list('agendamentos/', { preserveSnapshot: true })
+        .subscribe(snapshots => {
+            snapshots.forEach(snapshot => {
+                if(snapshot.val().nome == this.minhaBarbearia.nome){
+                    if(snapshot.val().atendido == true){
+                        this.service.agendamentosAtendidos.push(snapshot.val());
+                    }
                 }
-            } 
-          })
-        })
-  }
+            })
+        
+    })
+   }
   
+ separaAgendamentosAtendidos(element){
+    return (element.atendido == true);
+  }
+
+
+public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+};
+public barChartLabels:string[] = ['0-4', '4-8', '8-12', '12-16', '16-20', '20-24'];
+public barChartType:string = 'bar';
+public barChartLegend:boolean = true;
+
+public barChartData:any[] = [
+    {data: [0, 0, 0, 0, 0, 0], label: 'Agendamentos'}
+];
+
+// events
+public chartClicked(e:any):void {
+    console.log(e);
+}
+
+public chartHovered(e:any):void {
+    console.log(e);
+}
+
+public randomize():any {
+    // Only Change 3 values
+    let horariosAgendamentosAtendidos = [];
+    let contador: Array<Number> = [0, 0, 0, 0, 0, 0];
+
+    console.log(this.service.agendamentosAtendidos)
+    this.service.agendamentosAtendidos.forEach(element => {
+        let horario: string; 
+        horario = element.horario;
+        let horaSplitado = horario.split(':')[0]
+        horariosAgendamentosAtendidos.push(horaSplitado);
+        console.log(horariosAgendamentosAtendidos)
+    })
+    horariosAgendamentosAtendidos.forEach(element => {
+        if(element < 4){
+            let cont;
+            cont = contador[0];
+            contador[0] = cont + 1;
+        }
+        if(element >= 4 && element < 8){
+            let cont;
+            cont = contador[1];
+            contador[1] = cont + 1;
+        }
+        if(element >= 8 && element < 12){
+            let cont;
+            cont = contador[2];
+            contador[2] = cont + 1;
+        }
+        if(element >= 12 && element < 16){
+            let cont;
+            cont = contador[3];
+            contador[3] = cont + 1;
+        }
+        if(element >= 16 && element < 20){
+            let cont;
+            cont = contador[4];
+            contador[4] = cont + 1;
+        }
+        if(element >= 20 && element < 24){
+            let cont;
+            cont = contador[5];
+            contador[5] = cont + 1;
+        }
+    })
+
+    console.log(contador)
+    
+    let data = contador;
+    let clone = JSON.parse(JSON.stringify(this.barChartData));
+    clone[0].data = data;
+    this.barChartData = clone;
+    return {data: this.barChartData, label: 'Agendamentos'};
+    /**
+     * (My guess), for Angular to recognize the change in the dataset
+     * it has to change the dataset variable directly,
+     * so one way around it, is to clone the data, change it and then
+     * assign it;
+     */
+}
+
 }
