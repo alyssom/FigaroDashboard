@@ -18,7 +18,8 @@ export class AgendamentosComponent implements OnInit {
 
   constructor(public afAuth: AngularFireAuth, private router: Router, public service: GerenciadorUsuariosService,
    private db: AngularFireDatabase) {
-    
+   
+    this.agendamentos = this.service.agendamentos;
    }
 
 
@@ -27,18 +28,21 @@ export class AgendamentosComponent implements OnInit {
       if(this.service.user != undefined){
         this.user = this.service.user.user;
       }
-      
-      this.agendamentos = this.service.agendamentos;
       this.minhaBarbearia = this.service.minhaBarbearia;
+      function agendamentosNaoAtendidos(element, index, array) { 
+        return (element.atendido == false); 
+      } 
+      this.agendamentos = this.service.agendamentos;
+      this.agendamentos = this.agendamentos.filter(agendamentosNaoAtendidos);
   }
 
   finalizarServico(agendamento){
     console.log(agendamento)
-    this.db.list('/agendamentos', { preserveSnapshot: true })
+    this.db.list('/agendamentos/', { preserveSnapshot: true })
     .subscribe(snapshots => {
       snapshots.forEach(snapshot => {
-          if(snapshot.val().nome == this.minhaBarbearia.nome && snapshot.val().dataAgendamento == agendamento.dataAgendamento){
-            this.db.list('/agendamentos', {preserveSnapshot: true})
+          if(snapshot.val().nome == agendamento.nome && snapshot.val().dataAgendamento == agendamento.dataAgendamento  && snapshot.val().emailCliente == agendamento.emailCliente && snapshot.val().dataAtual == agendamento.dataAtual && snapshot.val().horario == agendamento.horario){
+            this.db.list('/agendamentos/', {preserveSnapshot: true})
             .update(snapshot.key, {
               atendido: true,
               dataAgendamento: agendamento.dataAgendamento,
@@ -46,12 +50,17 @@ export class AgendamentosComponent implements OnInit {
               duracao: agendamento.duracao,
               horario: agendamento.horario,
               nome: agendamento.nome,
-              nomeCliente: agendamento.nomeCliente,
+              emailCliente: agendamento.emailCliente,
               servico: agendamento.servico
             })
           }
       })
     })
+    function agendamentosNaoAtendidos(element, index, array) { 
+      return (element.atendido == false); 
+    } 
+    this.agendamentos = this.service.agendamentos;
+    this.agendamentos = this.agendamentos.filter(agendamentosNaoAtendidos);
   }
 
 

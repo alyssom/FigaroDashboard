@@ -21,6 +21,7 @@ import { AgendamentosComponent } from './agendamentos/agendamentos.component';
 import { ChartsService } from './charts.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
+import { AgendamentosConcluidosComponent } from './agendamentos-concluidos/agendamentos-concluidos.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ChartsModule } from 'ng2-charts';
     CadastroComponent,
     NavbarComponent,
     MenuLateralComponent,
-    AgendamentosComponent
+    AgendamentosComponent,
+    AgendamentosConcluidosComponent
   ],
   imports: [
     BrowserModule,
