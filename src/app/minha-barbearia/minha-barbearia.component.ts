@@ -19,7 +19,7 @@ export class MinhaBarbeariaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.minhaBarbearia = this.router.params.subscribe(res => console.log(res));
+    this.minhaBarbearia = this.service.minhaBarbearia;
     console.log(this.minhaBarbearia);
     this.fotoBarbearia = this.service.foto;
   }

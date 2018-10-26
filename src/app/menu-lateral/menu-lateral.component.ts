@@ -25,6 +25,12 @@ export class MenuLateralComponent implements OnInit {
   vaiAgendamentos(){
     this.router.navigate(['agendamentos'], this.minhaBarbearia);
   }
+  vaiHome(){
+    this.router.navigate(['home'], this.minhaBarbearia);
+  }
+  vaiAgendamentosConcluidos(){
+    this.router.navigate(['agendamentosConcluidos'], this.minhaBarbearia);
+  }
   ngOnInit() {
   }
 
