@@ -49,6 +49,41 @@
           <input type="number" class="form-control" formControlName="horario_ate" placeholder="Hora Fecha">
         </div>
       </div>
+      <div class="form-row form-group" id="rowSeis">
+        
+        <div class="col-md-6 mb-3" id="checkbox">
+          <label>Estacionamento:</label>
+          <div class="form-check form-control" >
+            <input class="form-check-input" formControlName="estacionamento" type="radio" name="estacionamento" id="simEstacionamento" value="sim" checked>
+            <label class="form-check-label" for="simEstacionamento">
+              Sim
+            </label>
+          </div>
+          <div class="form-check form-control">
+            <input class="form-check-input" formControlName="estacionamento" type="radio" name="estacionamento" id="naoEstacionamento" value="nao">
+            <label class="form-check-label" for="naoEstacionamento">
+              Não
+            </label>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3" id="checkbox"> 
+            <label>Bar:</label>
+            <div class="form-check form-control" >
+              <input class="form-check-input"  formControlName="bar" type="radio" name="bar" id="simBar" value="sim" checked>
+              <label class="form-check-label" for="simBar">
+                Sim
+              </label>
+            </div>
+            <div class="form-check form-control" >
+              <input class="form-check-input" formControlName="bar" type="radio" name="bar" id="naoBar" value="nao">
+              <label class="form-check-label" for="naoBar">
+                Não
+              </label>
+            </div>
+        </div>
+
+      </div>
     <div class="form-row form-group" id="rowCinco">
       <input type="file" (change)="imgSelecionada($event)" formControlName="fotos">
       <button class="btn btn-primary" type="submit" (click)="cadastrar()">Cadastrar</button>

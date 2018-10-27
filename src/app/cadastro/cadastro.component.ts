@@ -40,7 +40,9 @@ export class CadastroComponent implements OnInit {
         fotoProprietario: this.user.user.photoURL,
         horario_de: [null],
         horario_ate: [null],
-        fotos: [null]
+        fotos: [null],
+        estacionamento: [null],
+        bar: [null]
       })
     }else{
       this.formulario = this.formBuilder.group({
@@ -53,7 +55,9 @@ export class CadastroComponent implements OnInit {
         fotoProprietario: [null],
         horario_de: [null],
         horario_ate: [null],
-        fotos: [null]
+        fotos: [null],
+        estacionamento: [null],
+        bar: [null]
       })
     }
   }
@@ -73,6 +77,8 @@ export class CadastroComponent implements OnInit {
       var fotoProprietario = this.formulario.value.fotoProprietario;
       var horario_de = this.formulario.value.horario_de;
       var horario_ate = this.formulario.value.horario_ate;
+      var estacionamento = this.formulario.value.estacionamento;
+      var bar = this.formulario.value.bar;
 
       this.validaNomeBarberShopDuplicado(nome);
       this.validaHoraAbreHoraFecha(horario_de, horario_ate);
@@ -107,7 +113,9 @@ export class CadastroComponent implements OnInit {
              fotoProprietario: fotoProprietario,
              horario_de: horario_de,
              horario_ate: horario_ate,
-             foto: [] = downloadUrl
+             foto: [] = downloadUrl,
+             estacionamento: estacionamento,
+             bar: bar
           };
 
           updates['/barbearias/' + postKey] = postData;
