@@ -30,16 +30,29 @@
           </div>
 
           <div>
-              <button class="btn btn-success" (click)="randomize()">Buscar Horário de Maior Movimento</button>
+            <br>
+            <h2>Horário de Maior Movimento - Intervalo de 2 horas</h2>
+            <canvas id="canvasDois" baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabelsDois"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+            </canvas>
+            <br>
+            <h2>Horário de Maior Movimento - Intervalo de 4 horas</h2>
             <canvas id="canvas" baseChart
                     [datasets]="barChartData"
-                    [labels]="barChartLabels"
+                    [labels]="barChartLabelsUm"
                     [options]="barChartOptions"
                     [legend]="barChartLegend"
                     [chartType]="barChartType"
                     (chartHover)="chartHovered($event)"
                     (chartClick)="chartClicked($event)"></canvas>
-                    
+                    <br>
+                  
           </div>
           
          

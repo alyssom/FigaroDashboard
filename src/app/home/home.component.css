@@ -26,6 +26,7 @@
 #menuLateral{
     background-color: white;
     text-align: center;
+    height: 100%;
 }
 #divUser{
     text-align: center;
@@ -43,6 +44,10 @@
     text-align: center;
 }
 #canvas{
+    width: 1000px;
+    height: 500px;
+}
+#canvasDois{
     width: 1000px;
     height: 500px;
 }

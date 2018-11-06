@@ -13,6 +13,7 @@
 #menuLateral{
     background-color: white;
     text-align: center;
+    padding-bottom: 100%
 }
 #divUser{
     text-align: center;
@@ -20,6 +21,7 @@
 .sidebar-sticky{
     background-color: white;
     padding-bottom: 100%;
+    height: 100%;
 }
 
 #imgUser{
